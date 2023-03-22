@@ -645,35 +645,35 @@ class Kocom(rs485):
                 publish_list.append({ha_topic : ''})
             else:
                 publish_list.append({ha_topic : json.dumps(ha_payload)})
-        if self.wp_light:
-            for room, r_value in self.wp_list[DEVICE_LIGHT].items():
-                if type(r_value) == dict:
-                    for sub_device, d_value in r_value.items():
-                        if type(d_value) == dict:
-                            ha_topic = '{}/{}/{}_{}/config'.format(HA_PREFIX, HA_LIGHT, room, sub_device)
-                            ha_payload = {
-                                'name': '{}_{}_{}'.format(self._name, room, sub_device),
-                                'cmd_t': '{}/{}/{}_{}/set'.format(HA_PREFIX, HA_LIGHT, room, sub_device),
-                                'stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_LIGHT, room),
-                                'stat_val_tpl': '{{ value_json.' + str(sub_device) + ' }}',
-                                'pl_on': 'on',
-                                'pl_off': 'off',
-                                'uniq_id': '{}_{}_{}'.format(self._name, room, sub_device),
-                                'device': {
-                                    'name': 'Kocom {}'.format(room),
-                                    'ids': 'kocom_{}'.format(room),
-                                    'mf': 'KOCOM',
-                                    'mdl': 'Wallpad',
-                                    'sw': SW_VERSION
-                                }
-                            }
-                            subscribe_list.append((ha_topic, 0))
-                            subscribe_list.append((ha_payload['cmd_t'], 0))
-                            #subscribe_list.append((ha_payload['stat_t'], 0))
-                            if remove:
-                                publish_list.append({ha_topic : ''})
-                            else:
-                                publish_list.append({ha_topic : json.dumps(ha_payload)})
+#        if self.wp_light:
+#            for room, r_value in self.wp_list[DEVICE_LIGHT].items():
+#                if type(r_value) == dict:
+#                    for sub_device, d_value in r_value.items():
+#                        if type(d_value) == dict:
+#                            ha_topic = '{}/{}/{}_{}/config'.format(HA_PREFIX, HA_LIGHT, room, sub_device)
+#                            ha_payload = {
+#                                'name': '{}_{}_{}'.format(self._name, room, sub_device),
+#                                'cmd_t': '{}/{}/{}_{}/set'.format(HA_PREFIX, HA_LIGHT, room, sub_device),
+#                                'stat_t': '{}/{}/{}/state'.format(HA_PREFIX, HA_LIGHT, room),
+#                                'stat_val_tpl': '{{ value_json.' + str(sub_device) + ' }}',
+#                                'pl_on': 'on',
+#                                'pl_off': 'off',
+#                                'uniq_id': '{}_{}_{}'.format(self._name, room, sub_device),
+#                                'device': {
+#                                    'name': 'Kocom {}'.format(room),
+#                                    'ids': 'kocom_{}'.format(room),
+#                                    'mf': 'KOCOM',
+#                                    'mdl': 'Wallpad',
+#                                    'sw': SW_VERSION
+#                                }
+#                            }
+#                            subscribe_list.append((ha_topic, 0))
+#                            subscribe_list.append((ha_payload['cmd_t'], 0))
+#                            #subscribe_list.append((ha_payload['stat_t'], 0))
+#                            if remove:
+#                                publish_list.append({ha_topic : ''})
+#                            else:
+#                                publish_list.append({ha_topic : json.dumps(ha_payload)})
         if self.wp_plug:
             for room, r_value in self.wp_list[DEVICE_PLUG].items():
                 if type(r_value) == dict:
@@ -750,10 +750,10 @@ class Kocom(rs485):
 
     def send_to_homeassistant(self, device, room, value):
         v_value = json.dumps(value)
-        if device == DEVICE_LIGHT:
-            self.d_mqtt.publish("{}/{}/{}/state".format(HA_PREFIX, HA_LIGHT, room), v_value)
-            logger.info("[To HA]{}/{}/{}/state = {}".format(HA_PREFIX, HA_LIGHT, room, v_value))
-        elif device == DEVICE_PLUG:
+#        if device == DEVICE_LIGHT:
+#            self.d_mqtt.publish("{}/{}/{}/state".format(HA_PREFIX, HA_LIGHT, room), v_value)
+#            logger.info("[To HA]{}/{}/{}/state = {}".format(HA_PREFIX, HA_LIGHT, room, v_value))
+        if device == DEVICE_PLUG:
             self.d_mqtt.publish("{}/{}/{}/state".format(HA_PREFIX, HA_SWITCH, room), v_value)
             logger.info("[To HA]{}/{}/{}/state = {}".format(HA_PREFIX, HA_SWITCH, room, v_value))
         elif device == DEVICE_THERMOSTAT:
