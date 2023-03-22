@@ -19,10 +19,10 @@
   ],
   "options": {
     "RS485": {
-      "type": "Serial"
+      "type": "Socket"
     },
     "Socket": {
-      "server": "192.168.x.x",
+      "server": "192.168.1.110",
       "port": 8899
     },
     "SocketDevice": {
@@ -36,8 +36,8 @@
     },
     "MQTT": {
       "anonymous": false,
-      "server": "192.168.x.x",
-      "username": "id",
+      "server": "192.168.1.171",
+      "username": "chsyong",
       "password": "pw"
     },
     "Wallpad": {
@@ -49,7 +49,7 @@
       "elevator": false
     },
     "Advanced": {
-      "INIT_TEMP": 22,
+      "INIT_TEMP": 10,
       "SCAN_INTERVAL": 300,
       "SCANNING_INTERVAL": 0.8,
       "DEFAULT_SPEED" : "medium",
@@ -58,7 +58,7 @@
     "KOCOM_LIGHT_SIZE": [
       {
         "name": "livingroom",
-        "number": 3
+        "number": 2
       },
       {
         "name": "bedroom",
@@ -74,7 +74,7 @@
       },
       {
         "name": "kitchen",
-        "number": 3
+        "number": 2
       }
     ],
     "KOCOM_PLUG_SIZE": [
